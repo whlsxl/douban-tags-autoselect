@@ -29,7 +29,8 @@ function addJQuery(callback) {
 
 function init() {
   $(document).ajaxSuccess(function(event, xhr, settings) {
-    if (settings.url == "/j/subject/1418190/interest?interest=collect") {
+    var reg = new RegExp("/j/subject/\\d+/interest","i");
+    if (reg.exec(settings.url) != null && $('#advtags li.clearfix .auto_select').length == 0) {
       $('#advtags li.clearfix').each(function() {
         var tagp = $(this);
 
@@ -40,17 +41,17 @@ function init() {
             var selectClass = 'gract';
             var parent = $(this).parents("li").eq(0);
             var checked = $(this).is(":checked");
-            window.localStorage['auto_select' + parent.attr('id')] = checked;
+            window.localStorage['auto_select' + tagp.attr('id')] = checked;
             if (!checked) {
               selectClass = 'rdact';
             }
-            console.log(parent.find('span.' + selectClass));
-            $('span.' + selectClass, parent).trigger('click');
+            parent.click();
+            $('span.' + selectClass, parent).click();
           };
         });
 
         var last_auto_select = window.localStorage['auto_select' + tagp.attr('id')];
-        if (window.localStorage && !(last_auto_select === undefined) && last_auto_select) {
+        if (window.localStorage && !(last_auto_select === undefined) && last_auto_select == 'true') {
           $('.auto_select',tagp).click();
         }
       });
