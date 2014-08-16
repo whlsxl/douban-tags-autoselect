@@ -3,7 +3,7 @@
 // @author whl
 // @description 豆瓣电影，自动添加标签
 // @version 0.1.0
-// @namespace https://github.com/whlsxl/douban-rate-autoselect
+// @namespace https://github.com/whlsxl/douban-tags-autoselect
 // @match http://book.douban.com/*
 // @match http://movie.douban.com/*
 // @run-at document-idle
