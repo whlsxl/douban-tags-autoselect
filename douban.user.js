@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name AutoDouban
 // @author whl
-// @description 豆瓣电影，自动添加标签
+// @description 豆瓣电影，豆瓣读书，豆瓣音乐，评论自动添加标签。
 // @version 0.1.0
 // @namespace https://github.com/whlsxl/douban-tags-autoselect
 // @match http://book.douban.com/*
 // @match http://movie.douban.com/*
+// @match http://music.douban.com/*
 // @run-at document-idle
 // @copyright 2014+, Hailong
 // ==/UserScript==
@@ -48,13 +49,18 @@ function init() {
               selectClass = 'rdact';
             }
             parent.click();
-            $('span.' + selectClass, parent).click();
+            $('span.' + selectClass, parent).each(function(){
+              if ($(this).hasClass(selectClass)) {
+                $(this).click();
+              };
+            });
           };
         });
 
         var last_auto_select = window.localStorage['auto_select' + tagp.attr('id')];
         if (window.localStorage && !(last_auto_select === undefined) && last_auto_select == 'true') {
-          $('.auto_select',tagp).click();
+          $('.auto_select',tagp).attr('checked', true);
+          $('.auto_select',tagp).change();
         }
       });
     };
