@@ -7,6 +7,7 @@
 // @match http://book.douban.com/*
 // @match http://movie.douban.com/*
 // @run-at document-idle
+// @copyright 2014+, Hailong
 // ==/UserScript==
 
 if(typeof isChromeExtension == 'undefined'){
